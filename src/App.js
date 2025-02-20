@@ -14,19 +14,19 @@ import MainHeader from "./components/MainHeader/MainHeader";
 
 function App() {
 
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 
-	const healthCheckQuery = useQuery({ // react-query 5 버전부터는 querykey, queryFn 추가
-		queryKey: ["healthCheckQuery"], 
-		queryFn: healthCheckApi, 
-		cacheTime: 1000 * 60 * 10, //캐시 유지 시간(언마운트 이후),
-		staleTime: 1000 * 60 * 10, //10분마다 최신의 캐시 상태 유지(refetch)
-	}
-	);
+	// const healthCheckQuery = useQuery({ // react-query 5 버전부터는 querykey, queryFn 추가
+	// 	queryKey: ["healthCheckQuery"], 
+	// 	queryFn: healthCheckApi, 
+	// 	cacheTime: 1000 * 60 * 10, //캐시 유지 시간(언마운트 이후),
+	// 	staleTime: 1000 * 60 * 10, //10분마다 최신의 캐시 상태 유지(refetch)
+	// }
+	// );
 
-	if(!healthCheckQuery.isLoading) {
-		console.log(healthCheckQuery.data.data.status);
-	}
+	// if(!healthCheckQuery.isLoading) {
+	// 	console.log(healthCheckQuery.data.data.status);
+	// }
 
 	const userQuery = useQuery({
 		queryKey: ["userQuery"],
@@ -36,7 +36,7 @@ function App() {
 				return null;
 			}
 			const decodedJwt = jwtDecode(accessToken);
-			return await userApi(decodedJwt.userId);
+			return await userApi(decodedJwt.jti);
 		},
 	});
 
